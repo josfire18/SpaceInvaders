@@ -15,6 +15,9 @@ public:
     explicit MainMenu(QWidget *parent = 0);
     ~MainMenu();
 
+private slots:
+    void on_cmdStartGame_clicked();
+
 private:
     Ui::MainMenu *ui;
 };
