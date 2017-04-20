@@ -253,3 +253,7 @@ paket-files/
 
 build*
 *.pro.user
+
+*.db
+
+*.paint

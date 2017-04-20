@@ -1,6 +1,8 @@
 #include "mainmenu.h"
 #include "ui_mainmenu.h"
 #include "gamewindow.h"
+#include <QDir>
+#include <QCoreApplication>
 
 MainMenu::MainMenu(QWidget *parent) :
     QMainWindow(parent),
@@ -8,9 +10,17 @@ MainMenu::MainMenu(QWidget *parent) :
 {
     ui->setupUi(this);
 
+#ifdef __APPLE__
+    QDir bin(QCoreApplication::applicationDirPath());
+    bin.cdUp();
+    bin.cdUp();
+    bin.cdUp();
+    QDir::setCurrent(bin.absolutePath());
+#endif
+
     //Lock window size
-    this->setFixedSize(1905,1015);
-    ui->cmdStartGame->move(800,819);
+    this->setFixedSize(1000,500);
+    ui->cmdStartGame->move(400,419);
 
     //Set Main Menu Background
     QPixmap bkgnd("./images/MainMenu.jpg");
@@ -35,7 +45,7 @@ MainMenu::~MainMenu()
 
 void MainMenu::on_cmdStartGame_clicked()
 {
-    ui->cmdStartGame->setStyleSheet("background-color: black; color: rgba(0, 255, 29, 0;");
-    gameWindow* newGameWindow = new gameWindow(this);
-    newGameWindow
+    ui->cmdStartGame->setStyleSheet("background-color: black; color: rgba(0, 255, 29, 1);");
+    gameWindow* newGameWindow = new gameWindow();
+    newGameWindow->show();
 }

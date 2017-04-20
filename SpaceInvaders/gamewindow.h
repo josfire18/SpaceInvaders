@@ -1,11 +1,17 @@
 #ifndef GAMEWINDOW_H
 #define GAMEWINDOW_H
+#include <QWidget>
 
 
-class gameWindow
+class gameWindow: public QWidget
 {
+    Q_OBJECT
+
+
+private:
+
 public:
-    gameWindow();
+    explicit gameWindow(QWidget *parent = 0);
 };
 
 #endif // GAMEWINDOW_H
