@@ -1,5 +1,4 @@
 #include "gamewindow.h"
-#include <random>
 #include <QDebug>
 
 gameWindow::gameWindow(QWidget *parent) :
@@ -15,6 +14,7 @@ gameWindow::gameWindow(QWidget *parent) :
     this->setStyleSheet("background-color: black;");
 
     score =0;
+    lives = 3;
     clock = new QTime();
     clock->start();
     timer = new QTimer();
@@ -50,7 +50,9 @@ void gameWindow::paintEvent(QPaintEvent *)
 {
     QPainter painter(this);
     player->drawSpaceship(painter);
-    painter.drawText(10,10, QString::number(score));
+    painter.drawText(10,20, QString::number(score));
+    painter.drawText(10,620, QString::number(lives));
+    painter.setFont(QFont("Franklin Gothic Demi", 14));
     for(int i=0;i<enemies.size();i++){
         enemies.at(i)->setDirection(enemyDirec);
         enemies.at(i)->updateCoordinate();

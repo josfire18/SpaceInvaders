@@ -18,6 +18,8 @@ public:
 private slots:
     void on_cmdStartGame_clicked();
 
+    void on_cmdStartGame_pressed();
+
 private:
     Ui::MainMenu *ui;
 };

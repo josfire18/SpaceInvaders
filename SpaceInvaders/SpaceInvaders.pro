@@ -16,11 +16,11 @@ SOURCES += main.cpp\
         mainmenu.cpp \
     gamewindow.cpp \
     spaceship.cpp \
-    projectile.cpp
+    projectile.cpp \
 
 HEADERS  += mainmenu.h \
     gamewindow.h \
     spaceship.h \
-    projectile.h
+    projectile.h \
 
 FORMS    += mainmenu.ui

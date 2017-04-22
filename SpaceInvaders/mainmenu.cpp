@@ -41,7 +41,11 @@ MainMenu::~MainMenu()
 
 void MainMenu::on_cmdStartGame_clicked()
 {
-    ui->cmdStartGame->setStyleSheet("background-color: black; color: rgba(0, 255, 29, 1);");
     gameWindow* newGameWindow = new gameWindow();
     newGameWindow->show();
+}
+
+void MainMenu::on_cmdStartGame_pressed()
+{
+    ui->cmdStartGame->setStyleSheet("background-color: black; color: rgba(0, 255, 29, 1);");
 }

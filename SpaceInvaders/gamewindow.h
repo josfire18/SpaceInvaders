@@ -27,6 +27,7 @@ private:
     spaceship *player;
     QPainter* paint;
     int score;
+    int lives;
     vector<spaceship*>enemies;
     vector<projectile*>projectiles;
     int enemyDirec;

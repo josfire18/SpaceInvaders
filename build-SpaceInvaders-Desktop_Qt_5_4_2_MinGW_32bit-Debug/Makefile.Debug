@@ -355,6 +355,10 @@ debug/moc_gamewindow.cpp: C:/Qt/Qt5.4.2/5.4/mingw491_32/include/QtWidgets/QWidge
 		C:/Qt/Qt5.4.2/5.4/mingw491_32/include/QtCore/qcoreapplication.h \
 		C:/Qt/Qt5.4.2/5.4/mingw491_32/include/QtCore/qeventloop.h \
 		C:/Qt/Qt5.4.2/5.4/mingw491_32/include/QtGui/QKeyEvent \
+		C:/Qt/Qt5.4.2/5.4/mingw491_32/include/QtWidgets/QMessageBox \
+		C:/Qt/Qt5.4.2/5.4/mingw491_32/include/QtWidgets/qmessagebox.h \
+		C:/Qt/Qt5.4.2/5.4/mingw491_32/include/QtWidgets/qdialog.h \
+		../SpaceInvaders/projectile.h \
 		../SpaceInvaders/gamewindow.h
 	C:\Qt\Qt5.4.2\5.4\mingw491_32\bin\moc.exe $(DEFINES) -D__GNUC__ -DWIN32 -IC:/Qt/Qt5.4.2/5.4/mingw491_32/mkspecs/win32-g++ -I"Z:/Software Analysis Design (SAD)/Space Invaders/SpaceInvaders/SpaceInvaders" -IC:/Qt/Qt5.4.2/5.4/mingw491_32/include -IC:/Qt/Qt5.4.2/5.4/mingw491_32/include/QtQuick -IC:/Qt/Qt5.4.2/5.4/mingw491_32/include/QtWidgets -IC:/Qt/Qt5.4.2/5.4/mingw491_32/include/QtGui -IC:/Qt/Qt5.4.2/5.4/mingw491_32/include/QtQml -IC:/Qt/Qt5.4.2/5.4/mingw491_32/include/QtNetwork -IC:/Qt/Qt5.4.2/5.4/mingw491_32/include/QtCore -I. ..\SpaceInvaders\gamewindow.h -o debug\moc_gamewindow.cpp
 
@@ -883,6 +887,10 @@ debug/mainmenu.o: ../SpaceInvaders/mainmenu.cpp ../SpaceInvaders/mainmenu.h \
 		C:/Qt/Qt5.4.2/5.4/mingw491_32/include/QtCore/qfileinfo.h \
 		C:/Qt/Qt5.4.2/5.4/mingw491_32/include/QtCore/QCoreApplication \
 		C:/Qt/Qt5.4.2/5.4/mingw491_32/include/QtGui/QKeyEvent \
+		C:/Qt/Qt5.4.2/5.4/mingw491_32/include/QtWidgets/QMessageBox \
+		C:/Qt/Qt5.4.2/5.4/mingw491_32/include/QtWidgets/qmessagebox.h \
+		C:/Qt/Qt5.4.2/5.4/mingw491_32/include/QtWidgets/qdialog.h \
+		../SpaceInvaders/projectile.h \
 		C:/Qt/Qt5.4.2/5.4/mingw491_32/include/QtCore/QDebug \
 		C:/Qt/Qt5.4.2/5.4/mingw491_32/include/QtWidgets/QDesktopWidget
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\mainmenu.o ..\SpaceInvaders\mainmenu.cpp
@@ -1008,7 +1016,12 @@ debug/gamewindow.o: ../SpaceInvaders/gamewindow.cpp ../SpaceInvaders/gamewindow.
 		C:/Qt/Qt5.4.2/5.4/mingw491_32/include/QtCore/QCoreApplication \
 		C:/Qt/Qt5.4.2/5.4/mingw491_32/include/QtCore/qcoreapplication.h \
 		C:/Qt/Qt5.4.2/5.4/mingw491_32/include/QtCore/qeventloop.h \
-		C:/Qt/Qt5.4.2/5.4/mingw491_32/include/QtGui/QKeyEvent
+		C:/Qt/Qt5.4.2/5.4/mingw491_32/include/QtGui/QKeyEvent \
+		C:/Qt/Qt5.4.2/5.4/mingw491_32/include/QtWidgets/QMessageBox \
+		C:/Qt/Qt5.4.2/5.4/mingw491_32/include/QtWidgets/qmessagebox.h \
+		C:/Qt/Qt5.4.2/5.4/mingw491_32/include/QtWidgets/qdialog.h \
+		../SpaceInvaders/projectile.h \
+		C:/Qt/Qt5.4.2/5.4/mingw491_32/include/QtCore/QDebug
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\gamewindow.o ..\SpaceInvaders\gamewindow.cpp
 
 debug/spaceship.o: ../SpaceInvaders/spaceship.cpp ../SpaceInvaders/spaceship.h \
@@ -1240,7 +1253,13 @@ debug/projectile.o: ../SpaceInvaders/projectile.cpp ../SpaceInvaders/projectile.
 		C:/Qt/Qt5.4.2/5.4/mingw491_32/include/QtGui/qpainter.h \
 		C:/Qt/Qt5.4.2/5.4/mingw491_32/include/QtGui/qtextoption.h \
 		C:/Qt/Qt5.4.2/5.4/mingw491_32/include/QtGui/qpen.h \
-		C:/Qt/Qt5.4.2/5.4/mingw491_32/include/QtGui/QPixmap
+		C:/Qt/Qt5.4.2/5.4/mingw491_32/include/QtGui/QPixmap \
+		C:/Qt/Qt5.4.2/5.4/mingw491_32/include/QtCore/QDir \
+		C:/Qt/Qt5.4.2/5.4/mingw491_32/include/QtCore/qdir.h \
+		C:/Qt/Qt5.4.2/5.4/mingw491_32/include/QtCore/qfileinfo.h \
+		C:/Qt/Qt5.4.2/5.4/mingw491_32/include/QtCore/QCoreApplication \
+		C:/Qt/Qt5.4.2/5.4/mingw491_32/include/QtCore/qcoreapplication.h \
+		C:/Qt/Qt5.4.2/5.4/mingw491_32/include/QtCore/qeventloop.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\projectile.o ..\SpaceInvaders\projectile.cpp
 
 debug/moc_mainmenu.o: debug/moc_mainmenu.cpp 
