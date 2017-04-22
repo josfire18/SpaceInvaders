@@ -124,7 +124,7 @@ void gameWindow::checkCollisions()
             }
         }
 
-        if(enemies.at(i)->getYCoord()>(player->getYCoord()-20)){
+        if((enemies.at(i)->getYCoord()>(player->getYCoord()-20))&&(i>=enemies.size()-11)){
             this->stopTimer();
             QMessageBox mbox;
             mbox.setText("Game Over");
