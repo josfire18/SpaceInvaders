@@ -17,6 +17,7 @@ spaceship::spaceship(QWidget *parent):parent(parent)
     picHeight = 20;
     picWidth = 30;
     direction=0;
+    speed=2;
     paint = new QPainter();
 }
 
@@ -29,12 +30,12 @@ void spaceship::updateCoordinate()
 {
     if (direction==1){
         if(picX<(parent->width()-picWidth-5)){
-            picX+=10;
+            picX+=speed;
         }
     }
     else if (direction==2){
         if(picX>4){
-           picX-=10;
+           picX-=speed;
         }
     }
 }
@@ -60,7 +61,12 @@ int spaceship::getYCoord()
     return this->picY;
 }
 
-void spaceship::setImage(string filepath)
+void spaceship::setImage(QPixmap *imagefile)
 {
-    //pic1=new QPixmap(filepath);
+    pic1=imagefile;
+}
+
+void spaceship::setSpeed(int newSpeed)
+{
+    this->speed=newSpeed;
 }

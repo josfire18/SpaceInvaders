@@ -1,4 +1,6 @@
 #include "projectile.h"
+#include <QDir>
+#include <QCoreApplication>
 
 projectile::projectile(QWidget *parent):parent(parent)
 {

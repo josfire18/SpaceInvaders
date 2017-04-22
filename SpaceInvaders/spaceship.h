@@ -20,7 +20,8 @@ public:
     void setCoords(int newX, int newY);
     int getXCoord();
     int getYCoord();
-    void setImage(string filepath);
+    void setImage(QPixmap *imagefile);
+    void setSpeed(int newSpeed);
 
 private:
     int direction;
@@ -29,6 +30,7 @@ private:
     int picHeight, picWidth;
     QWidget* parent;
     QPainter* paint;
+    int speed;
 };
 
 #endif // SPACESHIP_H

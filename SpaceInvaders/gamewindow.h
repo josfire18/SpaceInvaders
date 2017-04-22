@@ -11,6 +11,7 @@
 #include <QPixmap>
 #include <QKeyEvent>
 #include <ctime>
+#include <QMessageBox>
 using namespace std;
 
 
@@ -26,6 +27,7 @@ private:
     QPainter* paint;
     int score;
     vector<spaceship*>enemies;
+    int enemyDirec;
 
 public:
     explicit gameWindow(QWidget *parent = 0);
@@ -33,6 +35,7 @@ public:
     void  paintEvent(QPaintEvent *);
     void keyPressEvent(QKeyEvent *evt);
     void stopTimer();
+    void checkCollisions();
 
 private slots:
     void updateCoordinates();
