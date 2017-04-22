@@ -51,6 +51,10 @@ void gameWindow::paintEvent(QPaintEvent *)
         enemies.at(i)->updateCoordinate();
         enemies.at(i)->drawSpaceship(painter);
     }
+    for(int i=0;i<projectiles.size();i++){
+        projectiles.at(i)->updateCoordinate();
+        projectiles.at(i)->drawProjectile(painter);
+    }
 }
 
 void gameWindow::keyPressEvent(QKeyEvent *evt)
@@ -62,6 +66,12 @@ void gameWindow::keyPressEvent(QKeyEvent *evt)
     else if (evt->key()==Qt::Key_Right){
         updateDirection(1);
         player->updateCoordinate();
+    }
+    else if (evt->key()==Qt::Key_Space){
+        projectile *newProjectile= new projectile(this);
+        newProjectile->setDirection(3);
+        newProjectile->setCoords(player->getXCoord()+15,player->getYCoord());
+        projectiles.push_back(newProjectile);
     }
 }
 
@@ -84,30 +94,35 @@ void gameWindow::checkCollisions()
                 collision=true;
             }
         }
-//        int enemyY=enemies.at(i)->getYCoord()-20;
-//        int enemyXLeft=enemies.at(i)->getXCoord();
-//        int enemyXRight=enemies.at(i)->getXCoord()+30;
-//        for(int j=0;j<projectile.size();j++){
-//            if((projectile.at(j).getYCoord()>enemyY)&&(projectile.at(j).getXCoord()>enemyXLeft)&&(projectile.at(j).getXCoord()<enemyXRight)){
-//                enemies.erase(enemies.begin()+i);
-//                projectile.erase(projectile.begin()+j);
-//            }
-//        }
+        int enemyYtop=enemies.at(i)->getYCoord();
+        int enemyYbot=enemies.at(i)->getYCoord()-20;
+        int enemyXLeft=enemies.at(i)->getXCoord();
+        int enemyXRight=enemies.at(i)->getXCoord()+30;
+        for(int j=0;j<projectiles.size();j++){
+            int projectilesYtop=projectiles.at(j)->getYCoord();
+            int projectilesX=projectiles.at(j)->getXCoord()+5;
+            if((projectilesYtop<enemyYtop)&&(projectilesYtop>enemyYbot)&&(projectilesX>enemyXLeft)&&(projectilesX<enemyXRight)){
+                enemies.erase(enemies.begin()+i);
+                projectiles.erase(projectiles.begin()+j);
+            }
+        }
 
-//        int playerY=player->getYCoord()-20;
-//        int playerXLeft=player->getXCoord();
-//        int playerXRight=player->getXCoord()+30;
-//        for(int j=0;j<projectile.size();j++){
-//            if((projectile.at(j).getYCoord()>playerY)&&(projectile.at(j).getXCoord()>playerXLeft)&&(projectile.at(j).getXCoord()<playerXRight)){
-//
-//                this->stopTimer();
-//        QMessageBox mbox;
-//        mbox.setText("Game Over");
-//        mbox.exec();
-//        this->close();
-//        break;
-//            }
-//        }
+        int playerYTop=player->getYCoord();
+        int playerYBot=player->getYCoord()-20;
+        int playerXLeft=player->getXCoord();
+        int playerXRight=player->getXCoord()+30;
+        for(int j=0;j<projectiles.size();j++){
+            int projectilesYtop=projectiles.at(j)->getYCoord();
+            int projectilesX=projectiles.at(j)->getXCoord()+5;
+            if((4==projectiles.at(j)->getDirection())&&(projectilesYtop<playerYBot)&&(projectilesYtop>playerYTop)&&(projectilesX>playerXLeft)&&(projectilesX<playerXRight)){
+                this->stopTimer();
+                QMessageBox mbox;
+                mbox.setText("Game Over");
+                mbox.exec();
+                this->close();
+                break;
+            }
+        }
         if(enemies.at(i)->getYCoord()>(player->getYCoord()-20)){
             this->stopTimer();
             QMessageBox mbox;

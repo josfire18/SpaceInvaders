@@ -11,7 +11,7 @@ projectile::projectile(QWidget *parent):parent(parent)
     bin.cdUp();
     QDir::setCurrent(bin.absolutePath());
 #endif
-    pic1 = new QPixmap("./images/projectile.png");
+    pic1 = new QPixmap("./images/projectileUP.png");
     picX=(10);
     picY=(10);
     picHeight = 15;
@@ -30,9 +30,9 @@ void projectile::updateCoordinate()
     //UP: User Fires
     if(direction == 3)
     {
-        if(picY<(parent->height()-picHeight-5))
+        if(picY>0)
         {
-            picY+=10;
+            picY-=5;
         }
     }
     //Down: Enemy Fires
@@ -40,7 +40,7 @@ void projectile::updateCoordinate()
     {
         if(picY<(parent->height()-picHeight-5))
         {
-            picY-=10;
+            picY+=5;
         }
     }
 }
@@ -69,5 +69,10 @@ int projectile::getYCoord()
 void projectile::setImage(string filepath)
 {
 
+}
+
+int projectile::getDirection()
+{
+    return this->direction;
 }
 

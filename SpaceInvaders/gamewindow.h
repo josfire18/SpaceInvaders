@@ -12,6 +12,7 @@
 #include <QKeyEvent>
 #include <ctime>
 #include <QMessageBox>
+#include "projectile.h"
 using namespace std;
 
 
@@ -27,6 +28,7 @@ private:
     QPainter* paint;
     int score;
     vector<spaceship*>enemies;
+    vector<projectile*>projectiles;
     int enemyDirec;
 
 public:

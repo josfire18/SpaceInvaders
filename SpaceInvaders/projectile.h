@@ -21,6 +21,7 @@ public:
     int getXCoord();
     int getYCoord();
     void setImage(string filepath);
+    int getDirection();
 
 private:
     int direction;
