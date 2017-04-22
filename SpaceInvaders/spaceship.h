@@ -16,7 +16,9 @@ public:
     void drawSpaceship(QPainter& paint);
     void updateCoordinate();
     void setDirection(int direc);
-    void setY(int newY);
+    void setCoords(int newX, int newY);
+    int getXCoord();
+    int getYCoord();
 
 private:
     int direction;

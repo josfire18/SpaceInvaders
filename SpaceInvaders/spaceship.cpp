@@ -12,8 +12,8 @@ spaceship::spaceship(QWidget *parent):parent(parent)
     QDir::setCurrent(bin.absolutePath());
 #endif
     pic1 = new QPixmap("./images/spaceship.png");
-    picX=(parent->width()/2-10);
-    picY=(parent->height()-50);
+    picX=(10);
+    picY=(10);
     picHeight = 20;
     picWidth = 30;
     direction=0;
@@ -44,12 +44,18 @@ void spaceship::setDirection(int direc)
     direction=direc;
 }
 
-void spaceship::setY(int newY)
+void spaceship::setCoords(int newX, int newY)
 {
-    if (newY < parent->height()-this->picY){
-       // picY = newY;
-    }
-    else{
-       // picY = 0;
-    }
+    picX=newX;
+    picY=newY;
+}
+
+int spaceship::getXCoord()
+{
+    return this->picX;
+}
+
+int spaceship::getYCoord()
+{
+    return this->picY;
 }

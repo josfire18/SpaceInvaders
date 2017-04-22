@@ -1,12 +1,4 @@
 #include "gamewindow.h"
-#include <QDir>
-#include <QCoreApplication>
-#include <QPainter>
-#include <QPixmap>
-#include <QKeyEvent>
-#include <QTimer>
-#include <ctime>
-#include <QTime>
 
 gameWindow::gameWindow(QWidget *parent) :
     QWidget(parent)
@@ -28,8 +20,16 @@ gameWindow::gameWindow(QWidget *parent) :
     connect(timer,SIGNAL(timeout()),this,SLOT(updateCoordinates()));
     timer->start();
     player = new spaceship(this);
-    player->setY(50);
+    player->setCoords(this->width()/2-10,this->height()-50);
     player->setDirection(1);
+
+    for(int i=0;i<5;i++){
+        for(int j=0;j<11;j++){
+            spaceship *enemy=new spaceship(this);
+            enemy->setCoords((this->width()/11)*j,30*i);
+            enemies.push_back(enemy);
+        }
+    }
 }
 
 gameWindow::~gameWindow()
@@ -42,6 +42,9 @@ void gameWindow::paintEvent(QPaintEvent *)
     QPainter painter(this);
     player->drawSpaceship(painter);
     painter.drawText(10,10, QString::number(score));
+    for(int i=0;i<enemies.size();i++){
+        enemies.at(i)->drawSpaceship(painter);
+    }
 }
 
 void gameWindow::keyPressEvent(QKeyEvent *evt)
@@ -62,7 +65,6 @@ void gameWindow::stopTimer()
 
 void gameWindow::updateCoordinates()
 {
-    score++;
     this->update();
 }
 

@@ -4,6 +4,14 @@
 #include "spaceship.h"
 #include <QTimer>
 #include <QTime>
+#include <QVector>
+#include <QDir>
+#include <QCoreApplication>
+#include <QPainter>
+#include <QPixmap>
+#include <QKeyEvent>
+#include <ctime>
+using namespace std;
 
 
 class gameWindow: public QWidget
@@ -17,6 +25,7 @@ private:
     spaceship *player;
     QPainter* paint;
     int score;
+    vector<spaceship*>enemies;
 
 public:
     explicit gameWindow(QWidget *parent = 0);

@@ -20,13 +20,6 @@ MainMenu::MainMenu(QWidget *parent) :
     QDir::setCurrent(bin.absolutePath());
 #endif
 
-    //Lock window size
-    //this->setMaximumSize();
-    QRect rec = QApplication::desktop()->screenGeometry();
-    int height = rec.height();
-    int width = rec.width();
-    qDebug() << height << ", " << width;
-    this->resize(width, height);
 
     //Set Main Menu Background
     QPixmap bkgnd("./images/MainMenu.jpg");
@@ -35,7 +28,7 @@ MainMenu::MainMenu(QWidget *parent) :
     palette.setBrush(QPalette::Background, bkgnd);
     this->setPalette(palette);
 
-    ui->cmdStartGame->move(800,819);
+    ui->cmdStartGame->move(175,350);
 
     //Set transparent Start button bg
     //ui->cmdStartGame->setStyleSheet("background-color: rgba(255, 255, 255, 0);");
