@@ -257,3 +257,5 @@ build*
 *.db
 
 *.paint
+
+*.autosave

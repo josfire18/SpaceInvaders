@@ -14,9 +14,11 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainmenu.cpp \
-    gamewindow.cpp
+    gamewindow.cpp \
+    spaceship.cpp
 
 HEADERS  += mainmenu.h \
-    gamewindow.h
+    gamewindow.h \
+    spaceship.h
 
 FORMS    += mainmenu.ui
