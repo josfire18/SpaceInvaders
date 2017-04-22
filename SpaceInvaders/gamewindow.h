@@ -30,6 +30,7 @@ private:
     vector<spaceship*>enemies;
     vector<projectile*>projectiles;
     int enemyDirec;
+    int shotCooldown;
 
 public:
     explicit gameWindow(QWidget *parent = 0);

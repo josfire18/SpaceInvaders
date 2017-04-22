@@ -17,7 +17,7 @@ spaceship::spaceship(QWidget *parent):parent(parent)
     picHeight = 20;
     picWidth = 30;
     direction=0;
-    speed=2;
+    speed=3;
     paint = new QPainter();
 }
 
@@ -29,7 +29,7 @@ void spaceship::drawSpaceship(QPainter &paint)
 void spaceship::updateCoordinate()
 {
     if (direction==1){
-        if(picX<(parent->width()-picWidth-5)){
+        if(picX<(parent->width()-picWidth-4)){
             picX+=speed;
         }
     }
