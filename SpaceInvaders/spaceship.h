@@ -4,6 +4,7 @@
 #include <QTimer>
 #include <QPainter>
 #include <QPixmap>
+using namespace std;
 
 
 class spaceship: public QWidget
@@ -19,6 +20,7 @@ public:
     void setCoords(int newX, int newY);
     int getXCoord();
     int getYCoord();
+    void setImage(string filepath);
 
 private:
     int direction;

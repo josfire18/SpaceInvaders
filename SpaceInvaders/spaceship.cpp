@@ -59,3 +59,8 @@ int spaceship::getYCoord()
 {
     return this->picY;
 }
+
+void spaceship::setImage(string filepath)
+{
+    //pic1=new QPixmap(filepath);
+}

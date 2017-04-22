@@ -26,7 +26,7 @@ gameWindow::gameWindow(QWidget *parent) :
     for(int i=0;i<5;i++){
         for(int j=0;j<11;j++){
             spaceship *enemy=new spaceship(this);
-            enemy->setCoords((this->width()/11)*j,30*i);
+            enemy->setCoords(40*j+100,30*i);
             enemies.push_back(enemy);
         }
     }
