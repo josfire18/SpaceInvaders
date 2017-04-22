@@ -34,19 +34,24 @@ public:
     {
         if (MainMenu->objectName().isEmpty())
             MainMenu->setObjectName(QStringLiteral("MainMenu"));
-        MainMenu->resize(488, 334);
-        QSizePolicy sizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+        MainMenu->resize(640, 480);
+        QSizePolicy sizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(MainMenu->sizePolicy().hasHeightForWidth());
         MainMenu->setSizePolicy(sizePolicy);
+        MainMenu->setMinimumSize(QSize(640, 480));
+        MainMenu->setMaximumSize(QSize(640, 480));
         centralWidget = new QWidget(MainMenu);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         cmdStartGame = new QPushButton(centralWidget);
         cmdStartGame->setObjectName(QStringLiteral("cmdStartGame"));
         cmdStartGame->setGeometry(QRect(200, 232, 281, 41));
-        sizePolicy.setHeightForWidth(cmdStartGame->sizePolicy().hasHeightForWidth());
-        cmdStartGame->setSizePolicy(sizePolicy);
+        QSizePolicy sizePolicy1(QSizePolicy::Fixed, QSizePolicy::Fixed);
+        sizePolicy1.setHorizontalStretch(0);
+        sizePolicy1.setVerticalStretch(0);
+        sizePolicy1.setHeightForWidth(cmdStartGame->sizePolicy().hasHeightForWidth());
+        cmdStartGame->setSizePolicy(sizePolicy1);
         QFont font;
         font.setFamily(QStringLiteral("Franklin Gothic Demi"));
         font.setPointSize(18);
@@ -56,7 +61,7 @@ public:
         MainMenu->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainMenu);
         menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 488, 21));
+        menuBar->setGeometry(QRect(0, 0, 640, 21));
         MainMenu->setMenuBar(menuBar);
         statusBar = new QStatusBar(MainMenu);
         statusBar->setObjectName(QStringLiteral("statusBar"));

@@ -31,7 +31,6 @@ MainMenu::MainMenu(QWidget *parent) :
     ui->cmdStartGame->move(175,350);
 
     //Set transparent Start button bg
-    //ui->cmdStartGame->setStyleSheet("background-color: rgba(255, 255, 255, 0);");
     ui->cmdStartGame->setStyleSheet("background-color: black; color: white;");
 }
 

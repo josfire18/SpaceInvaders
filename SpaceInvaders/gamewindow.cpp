@@ -51,11 +51,12 @@ void gameWindow::keyPressEvent(QKeyEvent *evt)
 {
     if (evt->key()==Qt::Key_Left){
         updateDirection(2);
+        player->updateCoordinate();
     }
     else if (evt->key()==Qt::Key_Right){
         updateDirection(1);
+        player->updateCoordinate();
     }
-    player->updateCoordinate();
 }
 
 void gameWindow::stopTimer()
