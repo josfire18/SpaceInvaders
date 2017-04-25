@@ -182,22 +182,22 @@ void gameWindow::checkCollisions()
 
             //qDebug()<<"end kill wall";
         }
+    }
 
-        //qDebug()<<"collision handler";
-        if(true==collision)
+    //qDebug()<<"collision handler";
+    if(true==collision)
+    {
+        if(1==enemyDirec)
         {
-            if(1==enemyDirec)
-            {
-                enemyDirec=2;
-            }
-            else if(2==enemyDirec){
-                enemyDirec=1;
-            }
-            for(int i=0;i<enemies.size();i++)
-            {
-                enemies.at(i)->setDirection(enemyDirec);
-                enemies.at(i)->setCoords(enemies.at(i)->getXCoord(),enemies.at(i)->getYCoord()+30 );
-            }
+            enemyDirec=2;
+        }
+        else if(2==enemyDirec){
+            enemyDirec=1;
+        }
+        for(int i=0;i<enemies.size();i++)
+        {
+            enemies.at(i)->setDirection(enemyDirec);
+            enemies.at(i)->setCoords(enemies.at(i)->getXCoord(),enemies.at(i)->getYCoord()+30 );
         }
     }
     //qDebug()<<"player death";
