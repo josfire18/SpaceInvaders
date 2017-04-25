@@ -81,11 +81,11 @@ void gameWindow::paintEvent(QPaintEvent *)
 void gameWindow::keyPressEvent(QKeyEvent *evt)
 {
     if (evt->key()==Qt::Key_Left){
-        updateDirection(2);
+        player->setDirection(2);
         player->updateCoordinate();
     }
     else if (evt->key()==Qt::Key_Right){
-        updateDirection(1);
+        player->setDirection(1);
         player->updateCoordinate();
     }
     else if (evt->key()==Qt::Key_Space){
@@ -94,7 +94,7 @@ void gameWindow::keyPressEvent(QKeyEvent *evt)
             QPixmap *proj1=new QPixmap("./images/projectileUP.png");
             newProjectile->setDirection(3);
             newProjectile->setImage(proj1);
-            newProjectile->setCoords(player->getXCoord()+15,player->getYCoord());
+            newProjectile->setCoords(player->getXCoord()+11,player->getYCoord());
             projectiles.push_back(newProjectile);
             shotCooldown=2;
         }
@@ -238,10 +238,5 @@ void gameWindow::updateCoordinates()
     if(0<shotCooldown){
         shotCooldown--;
     }
-}
-
-void gameWindow::updateDirection(int direc)
-{
-    player->setDirection(direc);
 }
 

@@ -46,7 +46,6 @@ public:
 
 private slots:
     void updateCoordinates();
-    void updateDirection(int direc);
 };
 
 #endif // GAMEWINDOW_H
