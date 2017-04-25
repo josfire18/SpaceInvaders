@@ -62,9 +62,17 @@ void gameWindow::paintEvent(QPaintEvent *)
 {
     QPainter painter(this);
     player->drawSpaceship(painter);
-    painter.drawText(10,20, QString::number(score));
-    painter.drawText(10,620, QString::number(lives));
-    painter.setFont(QFont("Franklin Gothic Demi", 14));
+
+    //Create pen
+    QPen pen;
+    pen.setBrush(Qt::green);
+    painter.setFont(QFont("Franklin Gothic Demi", 10));
+    painter.setPen(pen);
+    painter.drawText(1,20, "Score: ");
+    painter.drawText(1,470, "Lives: ");
+    painter.drawText(43,20, QString::number(score));
+    painter.drawText(38,470, QString::number(lives));
+
     for(int i=0;i<enemies.size();i++){
         enemies.at(i)->setDirection(enemyDirec);
         enemies.at(i)->updateCoordinate();
@@ -116,20 +124,26 @@ void gameWindow::checkCollisions()
 {
     //qDebug()<<"check collisions";
     bool collision=false;
-    for(int i=enemies.size()-1;i>=0;i--){
-        if(1==enemyDirec){
-            if(enemies.at(i)->getXCoord()>(this->width()-35)){
+    for(int i=enemies.size()-1;i>=0;i--)
+    {
+        if(1==enemyDirec)
+        {
+            if(enemies.at(i)->getXCoord()>(this->width()-35))
+            {
                 collision=true;
             }
         }
-        else if(2==enemyDirec){
-            if(enemies.at(i)->getXCoord()<5){
+        else if(2==enemyDirec)
+        {
+            if(enemies.at(i)->getXCoord()<5)
+            {
                 collision=true;
             }
         }
         //qDebug()<<"fire!";
         int randval=rand()%1000;
-        if(randval==1){
+        if(randval==1)
+        {
             projectile *newProjectile= new projectile(this);
             newProjectile->setDirection(4);
             newProjectile->setCoords(enemies.at(i)->getXCoord()+15,enemies.at(i)->getYCoord()-20);
@@ -138,10 +152,12 @@ void gameWindow::checkCollisions()
 
         //qDebug()<<"enemy death";
         QRect enemyRect(enemies.at(i)->getXCoord(),enemies.at(i)->getYCoord(),30,20);
-        for(int j=projectiles.size()-1;j>=0;j--){
+        for(int j=projectiles.size()-1;j>=0;j--)
+        {
             //qDebug()<<"j"<<j<<"i"<<i;
             QRect projRect(projectiles.at(j)->getXCoord(),projectiles.at(j)->getYCoord(),10,15);
-            if((3==projectiles.at(j)->getDirection())&&(projRect.intersects(enemyRect))){
+            if((3==projectiles.at(j)->getDirection())&&(projRect.intersects(enemyRect)))
+            {
                 //qDebug()<<"         death";
                 enemies.erase(enemies.begin()+i);
                 projectiles.erase(projectiles.begin()+j);
@@ -150,43 +166,57 @@ void gameWindow::checkCollisions()
         }
 
         //qDebug()<<"kill wall";
-        if((enemies.size()>i)&&(enemies.at(i)->getYCoord()>(player->getYCoord()-20))){
-            this->stopTimer();
-            QMessageBox mbox;
-            mbox.setText("Game Over");
-            mbox.exec();
-            this->close();
-            break;
+        if((enemies.size()>i)&&(enemies.at(i)->getYCoord()>(player->getYCoord()-20)))
+        {
+            projectiles.erase(projectiles.begin()+i);
+            lives--;
+            if(lives < 1)
+            {
+                this->stopTimer();
+                QMessageBox mbox;
+                mbox.setText("Game Over");
+                mbox.exec();
+                this->close();
+                break;
+            }
+
+            //qDebug()<<"end kill wall";
         }
 
-        //qDebug()<<"end kill wall";
+        //qDebug()<<"collision handler";
+        if(true==collision)
+        {
+            if(1==enemyDirec)
+            {
+                enemyDirec=2;
+            }
+            else if(2==enemyDirec){
+                enemyDirec=1;
+            }
+            for(int i=0;i<enemies.size();i++)
+            {
+                enemies.at(i)->setDirection(enemyDirec);
+                enemies.at(i)->setCoords(enemies.at(i)->getXCoord(),enemies.at(i)->getYCoord()+30 );
+            }
+        }
     }
-
-    //qDebug()<<"collision handler";
-    if(true==collision){
-        if(1==enemyDirec){
-            enemyDirec=2;
-        }
-        else if(2==enemyDirec){
-            enemyDirec=1;
-        }
-        for(int i=0;i<enemies.size();i++){
-            enemies.at(i)->setDirection(enemyDirec);
-            enemies.at(i)->setCoords(enemies.at(i)->getXCoord(),enemies.at(i)->getYCoord()+30 );
-        }
-    }
-
     //qDebug()<<"player death";
     QRect playerRect(player->getXCoord(),player->getYCoord(),30,20);
     for(int j=projectiles.size()-1;j>=0;j--){
         QRect projRect(projectiles.at(j)->getXCoord(),projectiles.at(j)->getYCoord(),10,15);
-        if((4==projectiles.at(j)->getDirection())&&(projRect.intersects(playerRect))){
-            this->stopTimer();
-            QMessageBox mbox;
-            mbox.setText("Game Over");
-            mbox.exec();
-            this->close();
-            break;
+        if((4==projectiles.at(j)->getDirection())&&(projRect.intersects(playerRect)))
+        {
+            projectiles.erase(projectiles.begin()+j);
+            lives--;
+            if(lives < 3)
+            {
+                this->stopTimer();
+                QMessageBox mbox;
+                mbox.setText("Game Over");
+                mbox.exec();
+                this->close();
+                break;
+            }
         }
     }
 
@@ -216,6 +246,7 @@ void gameWindow::checkCollisions()
         this->setEnemies();
     }
 }
+
 
 void gameWindow::setEnemies()
 {
@@ -270,6 +301,8 @@ void gameWindow::saucerHandler()
                 saucer->setCoords(-10,-10);
                 saucer->setDirection(0);
                 break;
+
+                //EXPLOSION CYCLE?
             }
         }
     }
