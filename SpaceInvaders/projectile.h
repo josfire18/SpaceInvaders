@@ -20,7 +20,7 @@ public:
     void setCoords(int newX, int newY);
     int getXCoord();
     int getYCoord();
-    void setImage(string filepath);
+    void setImage(QPixmap *imagefile);
     int getDirection();
 
 private:

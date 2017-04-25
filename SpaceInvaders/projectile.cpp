@@ -11,7 +11,7 @@ projectile::projectile(QWidget *parent):parent(parent)
     bin.cdUp();
     QDir::setCurrent(bin.absolutePath());
 #endif
-    pic1 = new QPixmap("./images/projectileUP.png");
+    pic1 = new QPixmap("./images/projectileDOWN.png");
     picX=(10);
     picY=(10);
     picHeight = 15;
@@ -66,9 +66,9 @@ int projectile::getYCoord()
     return this->picY;
 }
 
-void projectile::setImage(string filepath)
+void projectile::setImage(QPixmap *imagefile)
 {
-
+    pic1=imagefile;
 }
 
 int projectile::getDirection()

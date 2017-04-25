@@ -77,7 +77,9 @@ void gameWindow::keyPressEvent(QKeyEvent *evt)
     else if (evt->key()==Qt::Key_Space){
         if(0==shotCooldown){
             projectile *newProjectile= new projectile(this);
+            QPixmap *proj1=new QPixmap("./images/projectileUP.png");
             newProjectile->setDirection(3);
+            newProjectile->setImage(proj1);
             newProjectile->setCoords(player->getXCoord()+15,player->getYCoord());
             projectiles.push_back(newProjectile);
             shotCooldown=2;
@@ -92,6 +94,7 @@ void gameWindow::stopTimer()
 
 void gameWindow::checkCollisions()
 {
+    //qDebug()<<"check collisions";
     bool collision=false;
     for(int i=0;i<enemies.size();i++){
         if(1==enemyDirec){
@@ -104,7 +107,7 @@ void gameWindow::checkCollisions()
                 collision=true;
             }
         }
-
+        //qDebug()<<"fire!";
         int randval=rand()%1000;
         if(randval==1){
             projectile *newProjectile= new projectile(this);
@@ -113,20 +116,26 @@ void gameWindow::checkCollisions()
             projectiles.push_back(newProjectile);
         }
 
+        //qDebug()<<"enemy death";
         int enemyYtop=enemies.at(i)->getYCoord();
         int enemyYbot=enemies.at(i)->getYCoord()-20;
         int enemyXLeft=enemies.at(i)->getXCoord();
         int enemyXRight=enemies.at(i)->getXCoord()+30;
         for(int j=0;j<projectiles.size();j++){
+
+            //qDebug()<<"j"<<j<<"i"<<i;
             int projectilesYtop=projectiles.at(j)->getYCoord();
             int projectilesX=projectiles.at(j)->getXCoord()+5;
             if((3==projectiles.at(j)->getDirection())&&(projectilesYtop<enemyYtop)&&(projectilesYtop>enemyYbot)&&(projectilesX>enemyXLeft)&&(projectilesX<enemyXRight)){
+
+                //qDebug()<<"death";
                 enemies.erase(enemies.begin()+i);
                 projectiles.erase(projectiles.begin()+j);
             }
         }
 
-        if((enemies.at(i)->getYCoord()>(player->getYCoord()-20))&&(i>=enemies.size()-11)){
+        //qDebug()<<"kill wall";
+        if((enemies.size()>i)&&(enemies.at(i)->getYCoord()>(player->getYCoord()-20))){
             this->stopTimer();
             QMessageBox mbox;
             mbox.setText("Game Over");
@@ -134,7 +143,11 @@ void gameWindow::checkCollisions()
             this->close();
             break;
         }
+
+        //qDebug()<<"end kill wall";
     }
+
+    //qDebug()<<"collision handler";
     if(true==collision){
         if(1==enemyDirec){
             enemyDirec=2;
@@ -148,6 +161,7 @@ void gameWindow::checkCollisions()
         }
     }
 
+    //qDebug()<<"player death";
     int playerYTop=player->getYCoord();
     int playerYBot=player->getYCoord()-20;
     int playerXLeft=player->getXCoord();
@@ -165,12 +179,14 @@ void gameWindow::checkCollisions()
         }
     }
 
+    //qDebug()<<"projectile deletion";
     for(int j=0;j<projectiles.size();j++){
         if((projectiles.at(j)->getYCoord()<5)||(projectiles.at(j)->getYCoord()>this->height()-30)){
             projectiles.erase(projectiles.begin()+j);
         }
     }
 
+    //qDebug()<<"reset enemies";
     if(enemies.size()==0){
         QPixmap *enemy1=new QPixmap("./images/invader1.png");
         for(int i=0;i<5;i++){
