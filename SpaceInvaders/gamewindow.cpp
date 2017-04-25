@@ -29,6 +29,12 @@ gameWindow::gameWindow(QWidget *parent) :
 
     srand(time(0));
 
+    for(int i=0;i<45;i++){
+        Bunker *bunk = new Bunker(this);
+        bunk->setCoords(i*15,this->height()-70);
+        bunkers.push_back(bunk);
+    }
+
     enemyDirec=1;
     QPixmap *enemy1=new QPixmap("./images/invader1.png");
     for(int i=0;i<5;i++){
@@ -61,6 +67,9 @@ void gameWindow::paintEvent(QPaintEvent *)
     for(int i=0;i<projectiles.size();i++){
         projectiles.at(i)->updateCoordinate();
         projectiles.at(i)->drawProjectile(painter);
+    }
+    for(int i=0;i<bunkers.size();i++){
+        bunkers.at(i)->drawBunker(painter);
     }
 }
 
@@ -96,7 +105,7 @@ void gameWindow::checkCollisions()
 {
     //qDebug()<<"check collisions";
     bool collision=false;
-    for(int i=0;i<enemies.size();i++){
+    for(int i=enemies.size()-1;i>=0;i--){
         if(1==enemyDirec){
             if(enemies.at(i)->getXCoord()>(this->width()-35)){
                 collision=true;
@@ -117,20 +126,15 @@ void gameWindow::checkCollisions()
         }
 
         //qDebug()<<"enemy death";
-        int enemyYtop=enemies.at(i)->getYCoord();
-        int enemyYbot=enemies.at(i)->getYCoord()-20;
-        int enemyXLeft=enemies.at(i)->getXCoord();
-        int enemyXRight=enemies.at(i)->getXCoord()+30;
-        for(int j=0;j<projectiles.size();j++){
-
+        QRect enemyRect(enemies.at(i)->getXCoord(),enemies.at(i)->getYCoord(),30,20);
+        for(int j=projectiles.size()-1;j>=0;j--){
             //qDebug()<<"j"<<j<<"i"<<i;
-            int projectilesYtop=projectiles.at(j)->getYCoord();
-            int projectilesX=projectiles.at(j)->getXCoord()+5;
-            if((3==projectiles.at(j)->getDirection())&&(projectilesYtop<enemyYtop)&&(projectilesYtop>enemyYbot)&&(projectilesX>enemyXLeft)&&(projectilesX<enemyXRight)){
-
-                //qDebug()<<"death";
+            QRect projRect(projectiles.at(j)->getXCoord(),projectiles.at(j)->getYCoord(),10,15);
+            if((3==projectiles.at(j)->getDirection())&&(projRect.intersects(enemyRect))){
+                //qDebug()<<"         death";
                 enemies.erase(enemies.begin()+i);
                 projectiles.erase(projectiles.begin()+j);
+                break;
             }
         }
 
@@ -162,14 +166,10 @@ void gameWindow::checkCollisions()
     }
 
     //qDebug()<<"player death";
-    int playerYTop=player->getYCoord();
-    int playerYBot=player->getYCoord()-20;
-    int playerXLeft=player->getXCoord();
-    int playerXRight=player->getXCoord()+30;
-    for(int j=0;j<projectiles.size();j++){
-        int projectilesYtop=projectiles.at(j)->getYCoord();
-        int projectilesX=projectiles.at(j)->getXCoord()+5;
-        if((4==projectiles.at(j)->getDirection())&&(projectilesYtop<playerYTop)&&(projectilesYtop>playerYBot)&&(projectilesX>playerXLeft)&&(projectilesX<playerXRight)){
+    QRect playerRect(player->getXCoord(),player->getYCoord(),30,20);
+    for(int j=projectiles.size()-1;j>=0;j--){
+        QRect projRect(projectiles.at(j)->getXCoord(),projectiles.at(j)->getYCoord(),10,15);
+        if((4==projectiles.at(j)->getDirection())&&(projRect.intersects(playerRect))){
             this->stopTimer();
             QMessageBox mbox;
             mbox.setText("Game Over");
@@ -179,8 +179,19 @@ void gameWindow::checkCollisions()
         }
     }
 
+    for(int i=bunkers.size()-1;i>=0;i--){
+        QRect bunkRect(bunkers.at(i)->getXCoord(),bunkers.at(i)->getYCoord(),15,15);
+        for(int j=projectiles.size()-1;j>=0;j--){
+            QRect projRect(projectiles.at(j)->getXCoord(),projectiles.at(j)->getYCoord(),10,15);
+            if(projRect.intersects(bunkRect)){
+                bunkers.erase(bunkers.begin()+i);
+                projectiles.erase(projectiles.begin()+j);
+            }
+        }
+    }
+
     //qDebug()<<"projectile deletion";
-    for(int j=0;j<projectiles.size();j++){
+    for(int j=projectiles.size()-1;j>=0;j--){
         if((projectiles.at(j)->getYCoord()<5)||(projectiles.at(j)->getYCoord()>this->height()-30)){
             projectiles.erase(projectiles.begin()+j);
         }

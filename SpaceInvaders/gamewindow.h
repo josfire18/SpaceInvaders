@@ -13,6 +13,7 @@
 #include <ctime>
 #include <QMessageBox>
 #include "projectile.h"
+#include "bunker.h"
 using namespace std;
 
 
@@ -30,6 +31,7 @@ private:
     int lives;
     vector<spaceship*>enemies;
     vector<projectile*>projectiles;
+    vector<Bunker*>bunkers;
     int enemyDirec;
     int shotCooldown;
 

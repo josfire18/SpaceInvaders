@@ -17,10 +17,12 @@ SOURCES += main.cpp\
     gamewindow.cpp \
     spaceship.cpp \
     projectile.cpp \
+    bunker.cpp
 
 HEADERS  += mainmenu.h \
     gamewindow.h \
     spaceship.h \
     projectile.h \
+    bunker.h
 
 FORMS    += mainmenu.ui
