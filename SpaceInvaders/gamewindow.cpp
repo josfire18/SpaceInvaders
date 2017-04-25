@@ -29,10 +29,25 @@ gameWindow::gameWindow(QWidget *parent) :
 
     srand(time(0));
 
-    for(int i=0;i<45;i++){
-        Bunker *bunk = new Bunker(this);
-        bunk->setCoords(i*15,this->height()-70);
-        bunkers.push_back(bunk);
+    for(int i=0;i<4;i++){
+        for(int j=0;j<3;j++){
+            Bunker *bunk = new Bunker(this);
+            bunk->setCoords((((this->width()/4)*i)+50),(this->height()-70-(15*j)));
+            bunkers.push_back(bunk);
+        }
+        Bunker *bunk1 = new Bunker(this);
+        bunk1->setCoords((((this->width()/4)*i)+65),this->height()-100);
+        bunkers.push_back(bunk1);
+
+        Bunker *bunk2 = new Bunker(this);
+        bunk2->setCoords((((this->width()/4)*i)+80),this->height()-100);
+        bunkers.push_back(bunk2);
+
+        for(int j=0;j<3;j++){
+            Bunker *bunk = new Bunker(this);
+            bunk->setCoords((((this->width()/4)*i)+95),(this->height()-70-(15*j)));
+            bunkers.push_back(bunk);
+        }
     }
 
     enemyDirec=1;
@@ -184,7 +199,10 @@ void gameWindow::checkCollisions()
         for(int j=projectiles.size()-1;j>=0;j--){
             QRect projRect(projectiles.at(j)->getXCoord(),projectiles.at(j)->getYCoord(),10,15);
             if(projRect.intersects(bunkRect)){
-                bunkers.erase(bunkers.begin()+i);
+                bunkers.at(i)->decrementHP();
+                if(bunkers.at(i)->getHP()==0){
+                    bunkers.erase(bunkers.begin()+i);
+                }
                 projectiles.erase(projectiles.begin()+j);
             }
         }
