@@ -42,6 +42,7 @@ public:
     void keyPressEvent(QKeyEvent *evt);
     void stopTimer();
     void checkCollisions();
+    void setEnemies();
 
 private slots:
     void updateCoordinates();

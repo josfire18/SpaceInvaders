@@ -49,17 +49,7 @@ gameWindow::gameWindow(QWidget *parent) :
             bunkers.push_back(bunk);
         }
     }
-
-    enemyDirec=1;
-    QPixmap *enemy1=new QPixmap("./images/invader1.png");
-    for(int i=0;i<5;i++){
-        for(int j=0;j<11;j++){
-            spaceship *enemy=new spaceship(this);
-            enemy->setCoords(40*j+100,30*i);
-            enemy->setImage(enemy1);
-            enemies.push_back(enemy);
-        }
-    }
+    this->setEnemies();
 }
 
 gameWindow::~gameWindow()
@@ -217,14 +207,26 @@ void gameWindow::checkCollisions()
 
     //qDebug()<<"reset enemies";
     if(enemies.size()==0){
-        QPixmap *enemy1=new QPixmap("./images/invader1.png");
-        for(int i=0;i<5;i++){
-            for(int j=0;j<11;j++){
-                spaceship *enemy=new spaceship(this);
-                enemy->setCoords(40*j+100,30*i);
+        this->setEnemies();
+    }
+}
+
+void gameWindow::setEnemies()
+{
+    enemyDirec=1;
+    QPixmap *enemy1=new QPixmap("./images/invader1.png");
+    QPixmap *enemy2=new QPixmap("./images/invader2.png");
+    for(int i=0;i<5;i++){
+        for(int j=0;j<11;j++){
+            spaceship *enemy=new spaceship(this);
+            enemy->setCoords(40*j+100,30*i);
+            if(i>2){
                 enemy->setImage(enemy1);
-                enemies.push_back(enemy);
             }
+            else{
+                enemy->setImage(enemy2);
+            }
+            enemies.push_back(enemy);
         }
     }
 }
