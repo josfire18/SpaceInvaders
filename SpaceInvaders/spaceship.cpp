@@ -19,6 +19,7 @@ spaceship::spaceship(QWidget *parent):parent(parent)
     direction=0;
     speed=3;
     paint = new QPainter();
+    isSaucer=false;
 }
 
 void spaceship::drawSpaceship(QPainter &paint)
@@ -29,12 +30,12 @@ void spaceship::drawSpaceship(QPainter &paint)
 void spaceship::updateCoordinate()
 {
     if (direction==1){
-        if(picX<(parent->width()-picWidth-4)){
+        if(picX<(parent->width()-picWidth-4)||isSaucer){
             picX+=speed;
         }
     }
     else if (direction==2){
-        if(picX>4){
+        if(picX>4||isSaucer){
            picX-=speed;
         }
     }
@@ -69,4 +70,9 @@ void spaceship::setImage(QPixmap *imagefile)
 void spaceship::setSpeed(int newSpeed)
 {
     this->speed=newSpeed;
+}
+
+void spaceship::setIsSaucer()
+{
+    this->isSaucer=true;
 }

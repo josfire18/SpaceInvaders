@@ -26,6 +26,7 @@ gameWindow::gameWindow(QWidget *parent) :
     player->setDirection(1);
     player->setSpeed(10);
     shotCooldown=0;
+    hasSaucer=false;
 
     srand(time(0));
 
@@ -75,6 +76,33 @@ void gameWindow::paintEvent(QPaintEvent *)
     }
     for(int i=0;i<bunkers.size();i++){
         bunkers.at(i)->drawBunker(painter);
+    }
+
+    if(!hasSaucer){
+        int randval=rand()%100;
+        if(randval==1){
+            this->saucerHandler();
+        }
+    }
+    else{
+        saucer->drawSpaceship(painter);
+        saucer->updateCoordinate();
+        if(saucer->getXCoord()>this->width()){
+            hasSaucer=false;
+            saucer->setCoords(-10,-10);
+            saucer->setDirection(0);
+        }
+        QRect saucerRect(saucer->getXCoord(),saucer->getYCoord(),30,20);
+        for(int j=projectiles.size()-1;j>=0;j--){
+            QRect projRect(projectiles.at(j)->getXCoord(),projectiles.at(j)->getYCoord(),10,15);
+            if((3==projectiles.at(j)->getDirection())&&(projRect.intersects(saucerRect))){
+                projectiles.erase(projectiles.begin()+j);
+                hasSaucer=false;
+                saucer->setCoords(-10,-10);
+                saucer->setDirection(0);
+                break;
+            }
+        }
     }
 }
 
@@ -229,6 +257,18 @@ void gameWindow::setEnemies()
             enemies.push_back(enemy);
         }
     }
+}
+
+void gameWindow::saucerHandler()
+{
+    saucer = new spaceship(this);
+    saucer->setCoords(0,15);
+    saucer->setDirection(1);
+    QPixmap *saucerpic=new QPixmap("./images/Saucer.png");
+    saucer->setImage(saucerpic);
+    saucer->setSpeed(7);
+    hasSaucer=true;
+    saucer->setIsSaucer();
 }
 
 void gameWindow::updateCoordinates()

@@ -26,6 +26,7 @@ private:
     QTimer* timer;
     QTime* clock;
     spaceship *player;
+    spaceship *saucer;
     QPainter* paint;
     int score;
     int lives;
@@ -34,6 +35,7 @@ private:
     vector<Bunker*>bunkers;
     int enemyDirec;
     int shotCooldown;
+    bool hasSaucer;
 
 public:
     explicit gameWindow(QWidget *parent = 0);
@@ -43,6 +45,7 @@ public:
     void stopTimer();
     void checkCollisions();
     void setEnemies();
+    void saucerHandler();
 
 private slots:
     void updateCoordinates();

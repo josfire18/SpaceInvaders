@@ -22,6 +22,7 @@ public:
     int getYCoord();
     void setImage(QPixmap *imagefile);
     void setSpeed(int newSpeed);
+    void setIsSaucer();
 
 private:
     int direction;
@@ -31,6 +32,7 @@ private:
     QWidget* parent;
     QPainter* paint;
     int speed;
+    bool isSaucer;
 };
 
 #endif // SPACESHIP_H
