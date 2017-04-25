@@ -23,6 +23,8 @@ public:
     void setImage(QPixmap *imagefile);
     void setSpeed(int newSpeed);
     void setIsSaucer();
+    void setMonsterType(int mtype);
+    int getMonsterType();
 
 private:
     int direction;
@@ -33,6 +35,7 @@ private:
     QPainter* paint;
     int speed;
     bool isSaucer;
+    int monsterType;
 };
 
 #endif // SPACESHIP_H

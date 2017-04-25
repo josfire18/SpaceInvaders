@@ -20,6 +20,7 @@ spaceship::spaceship(QWidget *parent):parent(parent)
     speed=3;
     paint = new QPainter();
     isSaucer=false;
+    monsterType=0;
 }
 
 void spaceship::drawSpaceship(QPainter &paint)
@@ -75,4 +76,14 @@ void spaceship::setSpeed(int newSpeed)
 void spaceship::setIsSaucer()
 {
     this->isSaucer=true;
+}
+
+void spaceship::setMonsterType(int mtype)
+{
+    this->monsterType=mtype;
+}
+
+int spaceship::getMonsterType()
+{
+    return this->monsterType;
 }
