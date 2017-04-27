@@ -159,7 +159,15 @@ void gameWindow::checkCollisions()
             if((3==projectiles.at(j)->getDirection())&&(projRect.intersects(enemyRect)))
             {
                 //qDebug()<<"         death";
-                score+=10;
+                if(enemies.at(i)->getMonsterType()==1){
+                    score+=10;
+                }
+                else if(enemies.at(i)->getMonsterType()==2){
+                    score+=20;
+                }
+                else{
+                    score+=40;
+                }
                 enemies.erase(enemies.begin()+i);
                 projectiles.erase(projectiles.begin()+j);
                 break;
@@ -247,6 +255,7 @@ void gameWindow::setEnemies()
     enemyDirec=1;
     QPixmap *enemy1=new QPixmap("./images/invader1.png");
     QPixmap *enemy2=new QPixmap("./images/invader2.png");
+    QPixmap *enemy3=new QPixmap("./images/invader3.png");
     for(int i=0;i<5;i++){
         for(int j=0;j<11;j++){
             spaceship *enemy=new spaceship(this);
@@ -255,9 +264,13 @@ void gameWindow::setEnemies()
                 enemy->setImage(enemy1);
                 enemy->setMonsterType(1);
             }
-            else{
+            else if(i>0){
                 enemy->setImage(enemy2);
                 enemy->setMonsterType(2);
+            }
+            else{
+                enemy->setImage(enemy3);
+                enemy->setMonsterType(3);
             }
             enemies.push_back(enemy);
         }
