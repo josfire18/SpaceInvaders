@@ -17,7 +17,7 @@ spaceship::spaceship(QWidget *parent):parent(parent)
     picHeight = 20;
     picWidth = 30;
     direction=0;
-    speed=3;
+    speed=1;
     paint = new QPainter();
     isSaucer=false;
     monsterType=0;

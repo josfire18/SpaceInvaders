@@ -18,6 +18,7 @@ projectile::projectile(QWidget *parent):parent(parent)
     picWidth = 10;
     direction=0;
     paint = new QPainter();
+    speed=10;
 }
 
 void projectile::drawProjectile(QPainter &paint)
@@ -32,7 +33,7 @@ void projectile::updateCoordinate()
     {
         if(picY>0)
         {
-            picY-=5;
+            picY-=speed;
         }
     }
     //Down: Enemy Fires
@@ -40,7 +41,7 @@ void projectile::updateCoordinate()
     {
         if(picY<(parent->height()-picHeight-5))
         {
-            picY+=5;
+            picY+=speed;
         }
     }
 }
@@ -74,5 +75,10 @@ void projectile::setImage(QPixmap *imagefile)
 int projectile::getDirection()
 {
     return this->direction;
+}
+
+void projectile::setSpeed(int spd)
+{
+    this->speed=spd;
 }
 

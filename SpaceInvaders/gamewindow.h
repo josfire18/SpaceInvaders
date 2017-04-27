@@ -34,8 +34,8 @@ private:
     vector<projectile*>projectiles;
     vector<Bunker*>bunkers;
     int enemyDirec;
-    int shotCooldown;
     bool hasSaucer;
+    int fireRate;
 
 public:
     explicit gameWindow(QWidget *parent = 0);

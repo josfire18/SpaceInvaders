@@ -24,9 +24,9 @@ gameWindow::gameWindow(QWidget *parent) :
     player = new spaceship(this);
     player->setCoords(this->width()/2-10,this->height()-50);
     player->setDirection(1);
-    player->setSpeed(10);
-    shotCooldown=0;
+    player->setSpeed(15);
     hasSaucer=false;
+    fireRate=1;
 
     srand(time(0));
 
@@ -103,14 +103,21 @@ void gameWindow::keyPressEvent(QKeyEvent *evt)
         player->updateCoordinate();
     }
     else if (evt->key()==Qt::Key_Space){
-        if(0==shotCooldown){
+        bool hasProjectile=false;
+        for(int j=projectiles.size()-1;j>=0;j--)
+        {
+            if(projectiles.at(j)->getDirection()==3){
+                hasProjectile=true;
+            }
+        }
+        if(!hasProjectile){
             projectile *newProjectile= new projectile(this);
             QPixmap *proj1=new QPixmap("./images/projectileUP.png");
             newProjectile->setDirection(3);
             newProjectile->setImage(proj1);
+            newProjectile->setSpeed(15);
             newProjectile->setCoords(player->getXCoord()+11,player->getYCoord());
             projectiles.push_back(newProjectile);
-            shotCooldown=2;
         }
     }
 }
@@ -141,7 +148,7 @@ void gameWindow::checkCollisions()
             }
         }
         //qDebug()<<"fire!";
-        int randval=rand()%1000;
+        int randval=rand()%(5000/fireRate);
         if(randval==1)
         {
             projectile *newProjectile= new projectile(this);
@@ -246,6 +253,20 @@ void gameWindow::checkCollisions()
     //qDebug()<<"reset enemies";
     if(enemies.size()==0){
         this->setEnemies();
+        score+=1000;
+        lives++;
+    }
+    else if(enemies.size()<=11){
+        for(int i=enemies.size()-1;i>=0;i--){
+            enemies.at(i)->setSpeed(3);
+            fireRate=5;
+        }
+    }
+    else if(enemies.size()<=33){
+        for(int i=enemies.size()-1;i>=0;i--){
+            enemies.at(i)->setSpeed(2);
+            fireRate=2;
+        }
     }
 }
 
@@ -280,14 +301,14 @@ void gameWindow::setEnemies()
 void gameWindow::saucerHandler()
 {
     if(!hasSaucer){
-        int randval=rand()%100;
+        int randval=rand()%500;
         if(randval==1){
             saucer = new spaceship(this);
             saucer->setCoords(0,15);
             saucer->setDirection(1);
             QPixmap *saucerpic=new QPixmap("./images/Saucer.png");
             saucer->setImage(saucerpic);
-            saucer->setSpeed(7);
+            saucer->setSpeed(5);
             hasSaucer=true;
             saucer->setIsSaucer();
         }
@@ -320,8 +341,5 @@ void gameWindow::updateCoordinates()
 {
     this->checkCollisions();
     this->update();
-    if(0<shotCooldown){
-        shotCooldown--;
-    }
 }
 

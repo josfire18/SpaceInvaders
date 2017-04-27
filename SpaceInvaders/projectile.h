@@ -22,6 +22,7 @@ public:
     int getYCoord();
     void setImage(QPixmap *imagefile);
     int getDirection();
+    void setSpeed(int spd);
 
 private:
     int direction;
@@ -30,6 +31,7 @@ private:
     int picHeight, picWidth;
     QWidget* parent;
     QPainter* paint;
+    int speed;
 };
 
 #endif // PROJECTILE_H
