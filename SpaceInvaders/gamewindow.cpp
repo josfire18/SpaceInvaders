@@ -159,6 +159,7 @@ void gameWindow::checkCollisions()
             if((3==projectiles.at(j)->getDirection())&&(projRect.intersects(enemyRect)))
             {
                 //qDebug()<<"         death";
+                score+=10;
                 enemies.erase(enemies.begin()+i);
                 projectiles.erase(projectiles.begin()+j);
                 break;
@@ -168,19 +169,12 @@ void gameWindow::checkCollisions()
         //qDebug()<<"kill wall";
         if((enemies.size()>i)&&(enemies.at(i)->getYCoord()>(player->getYCoord()-20)))
         {
-            projectiles.erase(projectiles.begin()+i);
-            lives--;
-            if(lives < 1)
-            {
-                this->stopTimer();
-                QMessageBox mbox;
-                mbox.setText("Game Over");
-                mbox.exec();
-                this->close();
-                break;
-            }
-
-            //qDebug()<<"end kill wall";
+            this->stopTimer();
+            QMessageBox mbox;
+            mbox.setText("Game Over");
+            mbox.exec();
+            this->close();
+            break;
         }
     }
 
@@ -208,7 +202,7 @@ void gameWindow::checkCollisions()
         {
             projectiles.erase(projectiles.begin()+j);
             lives--;
-            if(lives < 3)
+            if(lives < 1)
             {
                 this->stopTimer();
                 QMessageBox mbox;
@@ -300,6 +294,7 @@ void gameWindow::saucerHandler()
                 hasSaucer=false;
                 saucer->setCoords(-10,-10);
                 saucer->setDirection(0);
+                score+=100;
                 break;
 
                 //EXPLOSION CYCLE?
