@@ -186,7 +186,9 @@ void gameWindow::checkCollisions()
         {
             this->stopTimer();
             QMessageBox mbox;
-            mbox.setText("Game Over");
+            QString str="      Game Over\nYour Score Was ";
+            str.append(QString::number(score));
+            mbox.setText(str);
             mbox.exec();
             this->close();
             break;
@@ -221,7 +223,9 @@ void gameWindow::checkCollisions()
             {
                 this->stopTimer();
                 QMessageBox mbox;
-                mbox.setText("Game Over");
+                QString str="     Game Over\nYour Score Was ";
+                str.append(QString::number(score));
+                mbox.setText(str);
                 mbox.exec();
                 this->close();
                 break;
