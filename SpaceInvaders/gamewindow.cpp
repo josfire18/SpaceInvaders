@@ -101,6 +101,13 @@ void gameWindow::keyPressEvent(QKeyEvent *evt)
     else if (evt->key()==Qt::Key_Right){
         player->setDirection(1);
         player->updateCoordinate();
+    }else if (evt->key()==Qt::Key_P||evt->key()==Qt::Key_Escape){
+        if(timer->isActive()){
+            timer->stop();
+        }
+        else{
+            timer->start();
+        }
     }
     else if (evt->key()==Qt::Key_Space){
         bool hasProjectile=false;
@@ -120,11 +127,6 @@ void gameWindow::keyPressEvent(QKeyEvent *evt)
             projectiles.push_back(newProjectile);
         }
     }
-}
-
-void gameWindow::stopTimer()
-{
-    timer->stop();
 }
 
 void gameWindow::checkCollisions()
@@ -184,7 +186,7 @@ void gameWindow::checkCollisions()
         //qDebug()<<"kill wall";
         if((enemies.size()>i)&&(enemies.at(i)->getYCoord()>(player->getYCoord()-20)))
         {
-            this->stopTimer();
+            timer->stop();
             QMessageBox mbox;
             QString str="      Game Over\nYour Score Was ";
             str.append(QString::number(score));
@@ -221,7 +223,7 @@ void gameWindow::checkCollisions()
             lives--;
             if(lives < 1)
             {
-                this->stopTimer();
+                timer->stop();
                 QMessageBox mbox;
                 QString str="     Game Over\nYour Score Was ";
                 str.append(QString::number(score));
@@ -263,13 +265,13 @@ void gameWindow::checkCollisions()
     else if(enemies.size()<=11){
         for(int i=enemies.size()-1;i>=0;i--){
             enemies.at(i)->setSpeed(5);
-            fireRate=250;
+            fireRate=100;
         }
     }
     else if(enemies.size()<=22){
         for(int i=enemies.size()-1;i>=0;i--){
             enemies.at(i)->setSpeed(4);
-            fireRate=500;
+            fireRate=400;
         }
     }
     else if(enemies.size()<=33){
