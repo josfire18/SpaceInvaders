@@ -18,7 +18,7 @@ projectile::projectile(QWidget *parent):parent(parent)
     picWidth = 10;
     direction=0;
     paint = new QPainter();
-    speed=10;
+    speed=20;
 }
 
 void projectile::drawProjectile(QPainter &paint)

@@ -26,7 +26,7 @@ gameWindow::gameWindow(QWidget *parent) :
     player->setDirection(1);
     player->setSpeed(15);
     hasSaucer=false;
-    fireRate=1;
+    fireRate=5000;
 
     srand(time(0));
 
@@ -115,7 +115,7 @@ void gameWindow::keyPressEvent(QKeyEvent *evt)
             QPixmap *proj1=new QPixmap("./images/projectileUP.png");
             newProjectile->setDirection(3);
             newProjectile->setImage(proj1);
-            newProjectile->setSpeed(15);
+            newProjectile->setSpeed(25);
             newProjectile->setCoords(player->getXCoord()+11,player->getYCoord());
             projectiles.push_back(newProjectile);
         }
@@ -148,7 +148,7 @@ void gameWindow::checkCollisions()
             }
         }
         //qDebug()<<"fire!";
-        int randval=rand()%(5000/fireRate);
+        int randval=rand()%(fireRate);
         if(randval==1)
         {
             projectile *newProjectile= new projectile(this);
@@ -262,15 +262,30 @@ void gameWindow::checkCollisions()
     }
     else if(enemies.size()<=11){
         for(int i=enemies.size()-1;i>=0;i--){
-            enemies.at(i)->setSpeed(3);
-            fireRate=5;
+            enemies.at(i)->setSpeed(5);
+            fireRate=250;
+        }
+    }
+    else if(enemies.size()<=22){
+        for(int i=enemies.size()-1;i>=0;i--){
+            enemies.at(i)->setSpeed(4);
+            fireRate=500;
         }
     }
     else if(enemies.size()<=33){
         for(int i=enemies.size()-1;i>=0;i--){
-            enemies.at(i)->setSpeed(2);
-            fireRate=2;
+            enemies.at(i)->setSpeed(3);
+            fireRate=1000;
         }
+    }
+    else if(enemies.size()<=44){
+        for(int i=enemies.size()-1;i>=0;i--){
+            enemies.at(i)->setSpeed(2);
+            fireRate=2500;
+        }
+    }
+    else{
+        fireRate=5000;
     }
 }
 
