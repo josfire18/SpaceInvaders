@@ -42,7 +42,6 @@ public:
     ~gameWindow();
     void  paintEvent(QPaintEvent *);
     void keyPressEvent(QKeyEvent *evt);
-    void stopTimer();
     void checkCollisions();
     void setEnemies();
     void saucerHandler();
